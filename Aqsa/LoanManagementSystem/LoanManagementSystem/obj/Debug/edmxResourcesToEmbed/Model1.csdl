@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB56Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="CNIC" />
+    </Key>
+    <Property Name="CNIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Loan_Application" Relationship="Self.FK_Loan_Application_Employee" FromRole="Employee" ToRole="Loan_Application" />
+  </EntityType>
+  <EntityType Name="Loan_Application">
+    <Key>
+      <PropertyRef Name="App_ID" />
+    </Key>
+    <Property Name="App_ID" Type="Int32" Nullable="false" />
+    <Property Name="Reason_Loan" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Loan_Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Pay_Back_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Loan_ID" Type="Int32" Nullable="false" />
+    <Property Name="CNIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Loan_Application_Employee" FromRole="Loan_Application" ToRole="Employee" />
+    <NavigationProperty Name="Loan_Policy" Relationship="Self.FK_Loan_Application_Loan_Policy" FromRole="Loan_Application" ToRole="Loan_Policy" />
+    <NavigationProperty Name="Loan_Info" Relationship="Self.FK_Loan_Info_Loan_Application" FromRole="Loan_Application" ToRole="Loan_Info" />
+  </EntityType>
+  <EntityType Name="Loan_Approval">
+    <Key>
+      <PropertyRef Name="Approval_ID" />
+    </Key>
+    <Property Name="Approval_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No_of_Installments" Type="Int32" Nullable="false" />
+    <Property Name="Installments_Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Approved_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Loan_Info" Relationship="Self.FK_Loan_Info_Loan_Approval" FromRole="Loan_Approval" ToRole="Loan_Info" />
+  </EntityType>
+  <EntityType Name="Loan_Policy">
+    <Key>
+      <PropertyRef Name="Loan_ID" />
+    </Key>
+    <Property Name="Loan_ID" Type="Int32" Nullable="false" />
+    <Property Name="Loan_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Loan_Discription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Max_Installments" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Loan_Application" Relationship="Self.FK_Loan_Application_Loan_Policy" FromRole="Loan_Policy" ToRole="Loan_Application" />
+  </EntityType>
+  <EntityType Name="Loan_Info">
+    <Key>
+      <PropertyRef Name="App_ID" />
+      <PropertyRef Name="Pay_ID" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="Reason_Of_Rejection" />
+      <PropertyRef Name="Approval_ID" />
+    </Key>
+    <Property Name="App_ID" Type="Int32" Nullable="false" />
+    <Property Name="Pay_ID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Reason_Of_Rejection" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Approval_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Loan_Application" Relationship="Self.FK_Loan_Info_Loan_Application" FromRole="Loan_Info" ToRole="Loan_Application" />
+    <NavigationProperty Name="Loan_Approval" Relationship="Self.FK_Loan_Info_Loan_Approval" FromRole="Loan_Info" ToRole="Loan_Approval" />
+  </EntityType>
+  <EntityType Name="EmployeListReport">
+    <Key>
+      <PropertyRef Name="CNIC" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Salary" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Address" />
+    </Key>
+    <Property Name="CNIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LoanApprovalReport">
+    <Key>
+      <PropertyRef Name="Approval_ID" />
+      <PropertyRef Name="No_of_Installments" />
+      <PropertyRef Name="Installments_Amount" />
+      <PropertyRef Name="Discription" />
+      <PropertyRef Name="Approved_date" />
+    </Key>
+    <Property Name="Approval_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="No_of_Installments" Type="Int32" Nullable="false" />
+    <Property Name="Installments_Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Approved_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="LoanPolicyReport">
+    <Key>
+      <PropertyRef Name="Loan_ID" />
+      <PropertyRef Name="Loan_type" />
+      <PropertyRef Name="Loan_Discription" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="Max_Installments" />
+    </Key>
+    <Property Name="Loan_ID" Type="Int32" Nullable="false" />
+    <Property Name="Loan_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Loan_Discription" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Max_Installments" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Application_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="CNIC" />
+      </Principal>
+      <Dependent Role="Loan_Application">
+        <PropertyRef Name="CNIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Application_Loan_Policy">
+    <End Role="Loan_Policy" Type="Self.Loan_Policy" Multiplicity="1" />
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Policy">
+        <PropertyRef Name="Loan_ID" />
+      </Principal>
+      <Dependent Role="Loan_Application">
+        <PropertyRef Name="Loan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Info_Loan_Application">
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="1" />
+    <End Role="Loan_Info" Type="Self.Loan_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Application">
+        <PropertyRef Name="App_ID" />
+      </Principal>
+      <Dependent Role="Loan_Info">
+        <PropertyRef Name="App_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Info_Loan_Approval">
+    <End Role="Loan_Approval" Type="Self.Loan_Approval" Multiplicity="1" />
+    <End Role="Loan_Info" Type="Self.Loan_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Approval">
+        <PropertyRef Name="Approval_ID" />
+      </Principal>
+      <Dependent Role="Loan_Info">
+        <PropertyRef Name="Approval_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="DB56Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Loan_Application" EntityType="Self.Loan_Application" />
+    <EntitySet Name="Loan_Approval" EntityType="Self.Loan_Approval" />
+    <EntitySet Name="Loan_Policy" EntityType="Self.Loan_Policy" />
+    <EntitySet Name="Loan_Info" EntityType="Self.Loan_Info" />
+    <EntitySet Name="EmployeListReports" EntityType="Self.EmployeListReport" />
+    <EntitySet Name="LoanApprovalReports" EntityType="Self.LoanApprovalReport" />
+    <EntitySet Name="LoanPolicyReports" EntityType="Self.LoanPolicyReport" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Application_Employee" Association="Self.FK_Loan_Application_Employee">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Application_Loan_Policy" Association="Self.FK_Loan_Application_Loan_Policy">
+      <End Role="Loan_Policy" EntitySet="Loan_Policy" />
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Info_Loan_Application" Association="Self.FK_Loan_Info_Loan_Application">
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+      <End Role="Loan_Info" EntitySet="Loan_Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Info_Loan_Approval" Association="Self.FK_Loan_Info_Loan_Approval">
+      <End Role="Loan_Approval" EntitySet="Loan_Approval" />
+      <End Role="Loan_Info" EntitySet="Loan_Info" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

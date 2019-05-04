@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LoanManagementSystem.Models.LoanApplicationmodel>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reasonofloan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paybacktime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cnic)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reasonofloan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paybacktime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cnic)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

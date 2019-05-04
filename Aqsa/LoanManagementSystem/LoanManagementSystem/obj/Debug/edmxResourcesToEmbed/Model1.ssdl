@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB56Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="CNIC" />
+    </Key>
+    <Property Name="CNIC" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="money" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loan_Application">
+    <Key>
+      <PropertyRef Name="App_ID" />
+    </Key>
+    <Property Name="App_ID" Type="int" Nullable="false" />
+    <Property Name="Reason_Loan" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Loan_Amount" Type="money" Nullable="false" />
+    <Property Name="Pay_Back_time" Type="datetime" Nullable="false" />
+    <Property Name="Loan_ID" Type="int" Nullable="false" />
+    <Property Name="CNIC" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loan_Approval">
+    <Key>
+      <PropertyRef Name="Approval_ID" />
+    </Key>
+    <Property Name="Approval_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_of_Installments" Type="int" Nullable="false" />
+    <Property Name="Installments_Amount" Type="money" Nullable="false" />
+    <Property Name="Discription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Approved_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB56.dbo.Loan_Info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Loan_Info">
+    <Key>
+      <PropertyRef Name="App_ID" />
+      <PropertyRef Name="Pay_ID" />
+      <PropertyRef Name="Status" />
+      <PropertyRef Name="Reason_Of_Rejection" />
+      <PropertyRef Name="Approval_ID" />
+    </Key>
+    <Property Name="App_ID" Type="int" Nullable="false" />
+    <Property Name="Pay_ID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Reason_Of_Rejection" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Approval_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Loan_Policy">
+    <Key>
+      <PropertyRef Name="Loan_ID" />
+    </Key>
+    <Property Name="Loan_ID" Type="int" Nullable="false" />
+    <Property Name="Loan_type" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Loan_Discription" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="Max_Installments" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB56.dbo.EmployeListReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="EmployeListReport">
+    <Key>
+      <PropertyRef Name="CNIC" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Password" />
+      <PropertyRef Name="Email" />
+      <PropertyRef Name="Salary" />
+      <PropertyRef Name="Gender" />
+      <PropertyRef Name="Address" />
+    </Key>
+    <Property Name="CNIC" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Salary" Type="money" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB56.dbo.LoanApprovalReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="LoanApprovalReport">
+    <Key>
+      <PropertyRef Name="Approval_ID" />
+      <PropertyRef Name="No_of_Installments" />
+      <PropertyRef Name="Installments_Amount" />
+      <PropertyRef Name="Discription" />
+      <PropertyRef Name="Approved_date" />
+    </Key>
+    <Property Name="Approval_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="No_of_Installments" Type="int" Nullable="false" />
+    <Property Name="Installments_Amount" Type="money" Nullable="false" />
+    <Property Name="Discription" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Approved_date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB56.dbo.LoanPolicyReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="LoanPolicyReport">
+    <Key>
+      <PropertyRef Name="Loan_ID" />
+      <PropertyRef Name="Loan_type" />
+      <PropertyRef Name="Loan_Discription" />
+      <PropertyRef Name="Amount" />
+      <PropertyRef Name="Max_Installments" />
+    </Key>
+    <Property Name="Loan_ID" Type="int" Nullable="false" />
+    <Property Name="Loan_type" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Loan_Discription" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="Amount" Type="money" Nullable="false" />
+    <Property Name="Max_Installments" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Application_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="CNIC" />
+      </Principal>
+      <Dependent Role="Loan_Application">
+        <PropertyRef Name="CNIC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Application_Loan_Policy">
+    <End Role="Loan_Policy" Type="Self.Loan_Policy" Multiplicity="1" />
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Policy">
+        <PropertyRef Name="Loan_ID" />
+      </Principal>
+      <Dependent Role="Loan_Application">
+        <PropertyRef Name="Loan_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Info_Loan_Application">
+    <End Role="Loan_Application" Type="Self.Loan_Application" Multiplicity="1" />
+    <End Role="Loan_Info" Type="Self.Loan_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Application">
+        <PropertyRef Name="App_ID" />
+      </Principal>
+      <Dependent Role="Loan_Info">
+        <PropertyRef Name="App_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Loan_Info_Loan_Approval">
+    <End Role="Loan_Approval" Type="Self.Loan_Approval" Multiplicity="1" />
+    <End Role="Loan_Info" Type="Self.Loan_Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Loan_Approval">
+        <PropertyRef Name="Approval_ID" />
+      </Principal>
+      <Dependent Role="Loan_Info">
+        <PropertyRef Name="Approval_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB56ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loan_Application" EntityType="Self.Loan_Application" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loan_Approval" EntityType="Self.Loan_Approval" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loan_Policy" EntityType="Self.Loan_Policy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Loan_Info" EntityType="Self.Loan_Info" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Loan_Info].[App_ID] AS [App_ID], 
+    [Loan_Info].[Pay_ID] AS [Pay_ID], 
+    [Loan_Info].[Status] AS [Status], 
+    [Loan_Info].[Reason_Of_Rejection] AS [Reason_Of_Rejection], 
+    [Loan_Info].[Approval_ID] AS [Approval_ID]
+    FROM [dbo].[Loan_Info] AS [Loan_Info]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="EmployeListReport" EntityType="Self.EmployeListReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [EmployeListReport].[CNIC] AS [CNIC], 
+    [EmployeListReport].[Name] AS [Name], 
+    [EmployeListReport].[Password] AS [Password], 
+    [EmployeListReport].[Email] AS [Email], 
+    [EmployeListReport].[Salary] AS [Salary], 
+    [EmployeListReport].[Gender] AS [Gender], 
+    [EmployeListReport].[Address] AS [Address]
+    FROM [dbo].[EmployeListReport] AS [EmployeListReport]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="LoanApprovalReport" EntityType="Self.LoanApprovalReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [LoanApprovalReport].[Approval_ID] AS [Approval_ID], 
+    [LoanApprovalReport].[No_of_Installments] AS [No_of_Installments], 
+    [LoanApprovalReport].[Installments_Amount] AS [Installments_Amount], 
+    [LoanApprovalReport].[Discription] AS [Discription], 
+    [LoanApprovalReport].[Approved_date] AS [Approved_date]
+    FROM [dbo].[LoanApprovalReport] AS [LoanApprovalReport]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="LoanPolicyReport" EntityType="Self.LoanPolicyReport" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [LoanPolicyReport].[Loan_ID] AS [Loan_ID], 
+    [LoanPolicyReport].[Loan_type] AS [Loan_type], 
+    [LoanPolicyReport].[Loan_Discription] AS [Loan_Discription], 
+    [LoanPolicyReport].[Amount] AS [Amount], 
+    [LoanPolicyReport].[Max_Installments] AS [Max_Installments]
+    FROM [dbo].[LoanPolicyReport] AS [LoanPolicyReport]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Application_Employee" Association="Self.FK_Loan_Application_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Application_Loan_Policy" Association="Self.FK_Loan_Application_Loan_Policy">
+      <End Role="Loan_Policy" EntitySet="Loan_Policy" />
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Info_Loan_Application" Association="Self.FK_Loan_Info_Loan_Application">
+      <End Role="Loan_Application" EntitySet="Loan_Application" />
+      <End Role="Loan_Info" EntitySet="Loan_Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Loan_Info_Loan_Approval" Association="Self.FK_Loan_Info_Loan_Approval">
+      <End Role="Loan_Approval" EntitySet="Loan_Approval" />
+      <End Role="Loan_Info" EntitySet="Loan_Info" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
