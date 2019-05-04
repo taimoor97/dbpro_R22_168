@@ -352,6 +352,7 @@
     <Content Include="Views\LoanApplication\Details.cshtml" />
     <Content Include="Views\LoanApplication\Index.cshtml" />
     <Content Include="Views\LoanApplication\Delete.cshtml" />
+    <Content Include="Views\Shared\_mylayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
